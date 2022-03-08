@@ -5,30 +5,22 @@ function Render({ data, classN, handleClick }) {
         <div>
             <h1>List Member Of {classN} Class</h1>
             <p >
-                {data.map((user, index) => {
+                {data.length > 0 && data.map((user, index) => {
                     return (
                         <div>
-                            <span key={user.name}> name: {user.name}, age: {user.Age}</span>
+                            <span > name: {user.name}, age: {user.Age}</span>
                             <button onClick={() => handleClick(index)}>Transfer</button>
                         </div>
                     )
                 }
-                )}
+                ) || <p>Emty Class</p>}
             </p>
         </div>
     )
 }
 
-function transReact({ data }) {
-    data.map((user, index) => {
-        const tt = data.slice(index, 1)
-    })
-}
 
-function transJava({ data, index }) {
-    const tt = data.slice(index, 1)
-    console.log(tt)
-}
+
 
 function Component(props) {
     const [users, setUser] = React.useState([
@@ -37,16 +29,30 @@ function Component(props) {
         { name: "Nguyễn Văn C", Age: 20 }
     ])
 
-    const [user2, setUse2] = React.useState([
+    const [user2, setUser2] = React.useState([
         { name: "Trần Văn A", Age: 26 },
         { name: "Trần Văn B", Age: 27 },
         { name: "Trần Văn C", Age: 28 }
     ])
+    const transReact = (index) => {
+        const tt = user2.splice(index, 1)
+        setUser([
+            ...users,
+            ...tt
+        ])
+    }
 
+    const transJava = (index) => {
+        const tt = users.splice(index, 1)
+        setUser2([
+            ...user2,
+            ...tt
+        ])
+    }
     return (
         <div>
-            <Render data={users} classN="React" handleClick={transReact} />
-            <Render data={user2} classN="Java" handleClick={transJava} />
+            <Render data={users} classN="React" handleClick={transJava} />
+            <Render data={user2} classN="Java" handleClick={transReact} />
         </div>
 
     )
