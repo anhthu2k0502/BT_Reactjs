@@ -19,9 +19,10 @@ function Render({ data, classN, handleClick }) {
     )
 }
 
-function transReact({ data, index }) {
-    const tt = data.slice(index, 1)
-    console.log(tt)
+function transReact({ data }) {
+    data.map((user, index) => {
+        const tt = data.slice(index, 1)
+    })
 }
 
 function transJava({ data, index }) {
