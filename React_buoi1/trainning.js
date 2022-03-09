@@ -1,10 +1,11 @@
 const divTag = document.getElementById("divTag");
 
 function Render({ data, classN, handleClick }) {
+
     return (
         <div>
             <h1>List Member Of {classN} Class</h1>
-            <p >
+            <p>
                 {data.length > 0 && data.map((user, index) => {
                     return (
                         <div>
@@ -13,10 +14,14 @@ function Render({ data, classN, handleClick }) {
                         </div>
                     )
                 }
-                ) || <p>Emty Class</p>}
+                ) || <p>Empty Member</p>}
             </p>
+
         </div>
     )
+
+
+
 }
 
 
@@ -42,6 +47,15 @@ function Component(props) {
         ])
     }
 
+    React.useEffect(() => {
+        if (users.length === 0) {
+            alert("empty class")
+        }
+        else if (user2.length === 0) {
+            alert("empty class")
+        }
+    })
+
     const transJava = (index) => {
         const tt = users.splice(index, 1)
         setUser2([
@@ -53,6 +67,7 @@ function Component(props) {
         <div>
             <Render data={users} classN="React" handleClick={transJava} />
             <Render data={user2} classN="Java" handleClick={transReact} />
+
         </div>
 
     )
