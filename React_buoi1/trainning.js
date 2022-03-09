@@ -1,22 +1,25 @@
 const divTag = document.getElementById("divTag");
 
-function Render({ data, classN, handleClick }) {
+function Render({ data, classN, handleClick, handleEdit }) {
 
     return (
         <div>
             <h1>List Member Of {classN} Class</h1>
             <p>
-                {data.length > 0 && data.map((user, index) => {
+                {data.length > 0 ? data.map((user, index) => {
                     return (
                         <div>
                             <span > name: {user.name}, age: {user.Age}</span>
                             <button onClick={() => handleClick(index)}>Transfer</button>
+
+                            <button onClick={() => handleEdit(user)}>Edit User</button>
+
+
                         </div>
                     )
                 }
-                ) || <p>Empty Member</p>}
+                ) : <p>Empty Member</p>}
             </p>
-
         </div>
     )
 
@@ -39,12 +42,29 @@ function Component(props) {
         { name: "Trần Văn B", Age: 27 },
         { name: "Trần Văn C", Age: 28 }
     ])
-    const transReact = (index) => {
-        const tt = user2.splice(index, 1)
-        setUser([
-            ...users,
-            ...tt
+
+    const [data, setData] = React.useState([
+        {
+            name: "anh thư",
+            Age: 23,
+            type: "react"
+        }
+    ])
+    const handleChangeInput = (e) => {
+        console.log(e.target.value)
+        setData({
+            ...data,
+            [e.target.name]: value
+        })
+    }
+
+    const handleEdit = (props) => {
+        setData([
+            ...data,
+
+
         ])
+        console.log(props.name)
     }
 
     React.useEffect(() => {
@@ -56,6 +76,13 @@ function Component(props) {
         }
     })
 
+    const transReact = (index) => {
+        const tt = user2.splice(index, 1)
+        setUser([
+            ...users,
+            ...tt
+        ])
+    }
     const transJava = (index) => {
         const tt = users.splice(index, 1)
         setUser2([
@@ -63,10 +90,20 @@ function Component(props) {
             ...tt
         ])
     }
+
     return (
         <div>
-            <Render data={users} classN="React" handleClick={transJava} />
+            <Render data={users} classN="React" handleClick={transJava} handleEdit={handleEdit} />
             <Render data={user2} classN="Java" handleClick={transReact} />
+
+
+            <h1>Edit Member</h1>
+            <form>
+                <lable>Name: </lable>
+                <input type='text' name='name' value={data.name} onChange={(e) => handleChangeInput(e)} ></input>
+                <lable>Age: </lable>
+                <input type='number' name='age' ></input>
+            </form>
 
         </div>
 
