@@ -45,9 +45,9 @@ function Component(props) {
 
     const [data, setData] = React.useState([
         {
-            name: "anh thư",
-            Age: 23,
-            type: "react"
+            name: "",
+            Age: "",
+            type: ""
         }
     ])
     const handleChangeInput = (e) => {
@@ -58,13 +58,10 @@ function Component(props) {
         })
     }
 
-    const handleEdit = (props) => {
-        setData([
-            ...data,
-
-
-        ])
-        console.log(props.name)
+    const Edit = (props) => {
+        setData(
+            props
+        )
     }
 
     React.useEffect(() => {
@@ -93,7 +90,7 @@ function Component(props) {
 
     return (
         <div>
-            <Render data={users} classN="React" handleClick={transJava} handleEdit={handleEdit} />
+            <Render data={users} classN="React" handleClick={transJava} handleEdit={Edit} />
             <Render data={user2} classN="Java" handleClick={transReact} />
 
 
@@ -102,7 +99,7 @@ function Component(props) {
                 <lable>Name: </lable>
                 <input type='text' name='name' value={data.name} onChange={(e) => handleChangeInput(e)} ></input>
                 <lable>Age: </lable>
-                <input type='number' name='age' ></input>
+                <input type='number' name='age' value={data.Age} onChange={(e) => handleChangeInput(e)} ></input>
             </form>
 
         </div>
