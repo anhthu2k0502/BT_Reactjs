@@ -1,6 +1,6 @@
 const divTag = document.getElementById("divTag");
 
-function Render({ data, classN, handleClick, handleEdit }) {
+function Render({ data, classN, handleClick, handleFill }) {
 
     return (
         <div>
@@ -11,25 +11,25 @@ function Render({ data, classN, handleClick, handleEdit }) {
                         <div>
                             <span > name: {user.name}, age: {user.Age}</span>
                             <button onClick={() => handleClick(index)}>Transfer</button>
-
-                            <button onClick={() => handleEdit(user)}>Edit User</button>
-
-
+                            <button onClick={() => handleFill(user, index)}>Edit User</button>
                         </div>
                     )
                 }
                 ) : <p>Empty Member</p>}
             </p>
         </div>
+
     )
-
-
-
 }
 
-
-
-
+/* function RenderButtonEdit({ props, handleEdit }) {
+    return (
+        <span>
+            <button onClick={() => handleEdit(props)}>edit</button>
+        </span>
+    )
+}
+ */
 function Component(props) {
     const [users, setUser] = React.useState([
         { name: "Nguyễn Văn A", Age: 20 },
@@ -46,8 +46,7 @@ function Component(props) {
     const [data, setData] = React.useState([
         {
             name: "",
-            Age: "",
-            type: ""
+            Age: ""
         }
     ])
     const handleChangeInput = (e) => {
@@ -56,19 +55,17 @@ function Component(props) {
             ...data,
             [e.target.name]: value
         })
+        console.log(data)
     }
 
-    const Fill = (props) => {
+
+
+    const Fill = (props, index) => {
+        console.log(index)
         setData(
             props
         )
     }
-
-    const editClick = (dl) => {
-        const dt = dl.Age
-        alert(dt)
-    }
-
     React.useEffect(() => {
         if (users.length === 0) {
             alert("empty class")
@@ -93,10 +90,19 @@ function Component(props) {
         ])
     }
 
+
+    const editReact = (user) => {
+        setUser([
+            ...user
+        ])
+        alert(users.name)
+    }
+
+
     return (
         <div>
-            <Render data={users} classN="React" handleClick={transJava} handleEdit={Fill} />
-            <Render data={user2} classN="Java" handleClick={transReact} handleEdit={Fill} />
+            <Render data={users} classN="React" handleClick={transJava} handleFill={Fill} />
+            <Render data={user2} classN="Java" handleClick={transReact} handleFill={Fill} />
 
 
             <h1>Edit Member</h1>
@@ -105,7 +111,7 @@ function Component(props) {
                 <input type='text' name='name' value={data.name} onChange={(e) => handleChangeInput(e)} ></input>
                 <lable>Age: </lable>
                 <input type='text' name='Age' value={data.Age} onChange={(e) => handleChangeInput(e)} ></input>
-                <button onSubmit={(data) => editClick(data)}>Edit</button>
+                <button onSubmit={() => editReact(data)}>Edit</button>
             </form>
 
         </div>
