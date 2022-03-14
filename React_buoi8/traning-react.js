@@ -289,10 +289,10 @@ const TranferMember = () => {
 
     //delete member
     const handleDeleteReact = (index) => {
-        reactMembers.splice(index, 1)
+        /* reactMembers.splice(index, 1)
         setFormData([
             ...reactMembers
-        ])
+        ]) */
     }
     const handleDeleteJava = (index) => {
         javaMembers.splice(index, 1)
